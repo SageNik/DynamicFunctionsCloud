@@ -1,0 +1,21 @@
+spring.application.name: proxy-server
+
+server.port: 2233
+
+eureka:
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    service-url.defaultZone: http://localhost:8761/eureka
+
+---
+---
+
+zuul:
+  ignored-services: '*'
+  routes:
+    dynamic-functions-service:
+      path: /dynamic-functions/**
+      serviceId: dynamic-functions-service
+      sensitive-headers: Set-Cookie,Authorization
+
